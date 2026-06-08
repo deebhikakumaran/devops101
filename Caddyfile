@@ -1,4 +1,6 @@
-:80 {
+tapwho.com {
+    tls deebhikakumaran@gmail.com
+
     handle {
         reverse_proxy nodejs-server:8000 {
             header_up Host {host}
