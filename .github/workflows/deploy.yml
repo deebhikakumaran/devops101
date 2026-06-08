@@ -13,6 +13,23 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Login to Docker Hub
+        uses: docker/login-action@v4
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: QEMU
+        uses: docker/setup-qemu-action@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Build and Push to Docker
+        run: |
+          docker build -t deebhika/devops101:initial .
+          docker push deebhika/devops101:initial
+
       - name: Deploy on Excloud
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -20,11 +37,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-
-            cd /home/ubuntu/devops101
-
-            git pull origin main
-            npm install
-            pm2 restart 0
+            sudo docker rm -f devops101 || true
+            sudo docker pull deebhika/devops101:initial
+            sudo docker run -d —name devops101 —restart unless-stopped -p 8000:8000 deebhika/devops101:initial
+            sudo docker image prune -f
