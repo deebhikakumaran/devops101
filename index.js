@@ -6,7 +6,7 @@ const PORT = process.env.PORT ?? 8000;
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.json({ message: 'server is healthy', status: 'dockerhub verification ongoing', update: 'arey we did basic ci/cd. now docker turn'});
+    res.json({ message: 'server is healthy', status: 'dockerhub verification ongoing', update: 'docker run check'});
 });
 
 app.listen(PORT, () => {
