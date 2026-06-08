@@ -39,5 +39,5 @@ jobs:
           script: |
             sudo docker rm -f devops101 || true
             sudo docker pull deebhika/devops101:initial
-            sudo docker run -d --name devops101 --restart unless-stopped -p 8000:8000 deebhika/devops101:initial
+            sudo docker run -d --name devops101 --restart unless-stopped -p 80:8000 deebhika/devops101:initial
             sudo docker image prune -f
