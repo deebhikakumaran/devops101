@@ -6,7 +6,7 @@ const PORT = process.env.PORT ?? 8000;
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.json({ message: 'server is healthy', status: 'verifying pm2 deployment and github actions sync.', update: 'fixed private-key error'});
+    res.json({ message: 'server is healthy', status: 'verifying pm2 deployment and github actions sync.', update: 'fixed .yml file'});
 });
 
 app.listen(PORT, () => {
