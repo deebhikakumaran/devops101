@@ -6,7 +6,7 @@ const PORT = process.env.PORT ?? 8000;
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.json({ message: 'server is healthy', status: 'public URL worked through pm2. checking code sync with pm2 manually.' });
+    res.json({ message: 'server is healthy', status: 'verifying pm2 deployment and github actions sync.' });
 });
 
 app.listen(PORT, () => {
