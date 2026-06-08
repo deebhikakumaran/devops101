@@ -37,7 +37,10 @@ jobs:
           username: ubuntu
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            sudo docker rm -f devops101 || true
-            sudo docker pull deebhika/devops101:initial
-            sudo docker run -d --name devops101 --restart unless-stopped -p 80:8000 deebhika/devops101:initial
+            cd /home/ubuntu/devops101
+            git pull origin main
+
+            sudo docker compose pull
+            sudo docker compose up -d
+
             sudo docker image prune -f

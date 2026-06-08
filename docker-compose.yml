@@ -1,0 +1,20 @@
+services:
+  nodejs-server:
+    image: deebhika/devops101:initial
+    deploy:
+      replicas: 5
+    networks:
+      - tapwho-internal
+
+  caddy:
+    image: caddy:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    networks:
+      - tapwho-internal
+
+networks:
+  tapwho-internal:
+    driver: bridge
